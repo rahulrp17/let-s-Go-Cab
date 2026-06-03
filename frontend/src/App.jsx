@@ -11,8 +11,22 @@ import Login from "./Component/Login/Login.jsx";
 import TariffChart from "./Pages/Tariff_Chart/TariffChart.jsx";
 import AttachVehicle from "./Pages/Vehicles/Vehicles.jsx";
 import ContactUs from "./Pages/Contact_Us/ContactUs.jsx";
+import Loder from "./Component/Loader.jsx"
 
 function App() {
+  
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) return <Loader />;
+  
   return (
     <BrowserRouter>
       <Navbar />
