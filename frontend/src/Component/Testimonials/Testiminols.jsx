@@ -38,7 +38,7 @@ const Testimonials = () => {
   };
 
   return (
-    <section className="py-16 bg-gray-100" id="testimonials" ref={ref}>
+    <section className="py-16 bg-gray-100 overflow-hidden" id="testimonials" ref={ref}>
       <div className="max-w-6xl mx-auto px-4 text-center">
         <Motion.h2
           className="text-3xl font-bold mb-12"
