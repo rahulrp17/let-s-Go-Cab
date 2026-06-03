@@ -56,7 +56,7 @@ const Booking = () => {
       googleMapsApiKey="YOUR_GOOGLE_MAPS_API_KEY"
       libraries={["places"]}
     >
-      <div className="h-175 bg-image flex items-center justify-center">
+      <div className="h-175 bg-image flex items-center justify-center overfloe-hidden">
         <Motion.div
           initial={{ opacity: 0, y: 70 }}
           animate={{ opacity: 1, y: 0 }}
