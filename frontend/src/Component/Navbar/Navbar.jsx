@@ -24,7 +24,7 @@ const Navbar = () => {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 2, delay: 0.2, type: "spring", stiffness: 100 }}
       className="navbar bg-white shadow-2xl top-0 left-0 w-full  fixed z-50 bottom-160 overflow-hidden"
-    
+    >
       <div className="flex justify-between items-center px-4 py-2">
         {/* Logo */}
         <div className="logo flex items-center flex-col">
