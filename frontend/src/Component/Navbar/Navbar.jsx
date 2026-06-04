@@ -1,13 +1,11 @@
 import React, { useState } from "react";
-import "./Navbar.css";
-import { logo5 } from "../../assets/images";
 import { NavLink, useNavigate } from "react-router-dom";
-import { motion as Motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { motion as Motion, AnimatePresence } from "framer-motion";
+import { ArrowRight, Menu, X } from "lucide-react";
+import { logo5 } from "../../assets/images";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isAccountCreated] = useState(false);
   const navigate = useNavigate();
 
   const menuItems = [
@@ -19,106 +17,118 @@ const Navbar = () => {
   ];
 
   return (
-    <Motion.div
-      initial={{ y: -120, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 2, delay: 0.2, type: "spring", stiffness: 100 }}
-      className="navbar bg-white shadow-2xl top-0 left-0 w-full z-50  fixed  bottom-160 overflow-hidden"
-    >
-      <div className="flex justify-between items-center px-4 py-2">
-        {/* Logo */}
-        <div className="logo flex items-center flex-col">
-          <img
-            src={logo5}
-            alt="Let's Go Cab logo"
-            className="w-28 h-18 rounded-full"
-          />
-        </div>
+    <>
+      <Motion.nav
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{
+          duration: 0.8,
+          type: "spring",
+          stiffness: 120,
+        }}
+        className="fixed top-0 left-0 w-full bg-white shadow-lg z-50"
+      >
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="flex items-center justify-between h-20">
 
-        {/* Toggle button - visible on small screens */}
-        <button
-          className="md:hidden text-3xl text-gray-700 cursor-pointer pr-3"
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          {isOpen ? "✖" : "☰"}
-        </button>
-
-        {/* Desktop Nav Links */}
-        <div className="hidden md:flex items-center text-lg font-bold">
-          {menuItems.map(({ path, label }) => (
-            <Motion.div
-              whileHover={{
-                scale: 1.1,
-                originX: 0.5,
-                transition: { duration: 0.3 },
-              }}
-              key={path}
-              className="mx-4"
-            >
-              <NavLink
-                to={path}
-                className={({ isActive }) =>
-                  isActive
-                    ? "text-blue-700"
-                    : "text-gray-600 hover:text-blue-800"
-                }
-              >
-                {label}
-              </NavLink>
-            </Motion.div>
-          ))}
-
-          {/* Login/Signup button */}
-          <div
-            className="bg-indigo-100 text-gray-700 border border-indigo-800 hover:bg-indigo-600 hover:text-white font-semibold py-2 px-4 rounded-full transition duration-300 cursor-pointer flex items-center gap-2"
-            onClick={() => navigate(isAccountCreated ? "/login" : "/signup")}
-          >
-            {isAccountCreated ? "Login" : "Sign Up"}
-            <ArrowRight className="w-5 h-5" />
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile Nav */}
-      {isOpen && (
-        <Motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            duration: 0.5,
-            type: "spring",
-            delay: 0.2,
-            stiffness: 100,
-          }}
-          exit={{ opacity: 0, y: -10 }}
-          className="md:hidden bg-blue-100 flex flex-col gap-3 mt-4 text-lg font-semibold items-center pb-4"
-        >
-          {menuItems.map(({ path, label }) => (
-            <NavLink
-              key={path}
-              to={path}
-              onClick={() => setIsOpen(false)}
-              className={({ isActive }) =>
-                isActive
-                  ? "text-blue-800 border-b-4 border-blue-800"
-                  : "text-gray-700 pl-2 hover:text-blue-800"
-              }
-            >
-              {label}
+            {/* Logo */}
+            <NavLink to="/" className="flex items-center">
+              <img
+                src={logo5}
+                alt="Let's Go Cab"
+                className="w-24 md:w-28 object-contain"
+              />
             </NavLink>
-          ))}
 
-          {/* Login/Signup button for mobile */}
-          <div
-            className="bg-transparent text-gray-800 border border-gray-800 hover:bg-gray-800 hover:text-white font-semibold py-2 px-4 rounded-full transition duration-300 cursor-pointer flex items-center gap-2"
-            onClick={() => navigate(isAccountCreated ? "/login" : "/signUp")}
-          >
-            {isAccountCreated ? "Login" : "Sign Up"}
-            <ArrowRight className="w-5 h-5" />
+            {/* Desktop Menu */}
+            <div className="hidden md:flex items-center gap-8 font-semibold">
+              {menuItems.map((item) => (
+                <NavLink
+                  key={item.path}
+                  to={item.path}
+                  className={({ isActive }) =>
+                    `transition-all duration-300 ${
+                      isActive
+                        ? "text-indigo-600"
+                        : "text-gray-700 hover:text-indigo-600"
+                    }`
+                  }
+                >
+                  {item.label}
+                </NavLink>
+              ))}
+
+              <Motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => navigate("/signup")}
+                className="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-full flex items-center gap-2"
+              >
+                Sign Up
+                <ArrowRight size={18} />
+              </Motion.button>
+            </div>
+
+            {/* Mobile Toggle */}
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="md:hidden"
+            >
+              {isOpen ? (
+                <X size={30} className="text-gray-700" />
+              ) : (
+                <Menu size={30} className="text-gray-700" />
+              )}
+            </button>
           </div>
-        </Motion.div>
-      )}
-    </Motion.div>
+        </div>
+
+        {/* Mobile Menu */}
+        <AnimatePresence>
+          {isOpen && (
+            <Motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+              className="md:hidden bg-white border-t shadow-lg"
+            >
+              <div className="flex flex-col items-center py-5 gap-5">
+                {menuItems.map((item) => (
+                  <NavLink
+                    key={item.path}
+                    to={item.path}
+                    onClick={() => setIsOpen(false)}
+                    className={({ isActive }) =>
+                      isActive
+                        ? "text-indigo-600 font-semibold"
+                        : "text-gray-700"
+                    }
+                  >
+                    {item.label}
+                  </NavLink>
+                ))}
+
+                <Motion.button
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => {
+                    setIsOpen(false);
+                    navigate("/signup");
+                  }}
+                  className="bg-indigo-600 text-white px-5 py-2 rounded-full flex items-center gap-2"
+                >
+                  Sign Up
+                  <ArrowRight size={18} />
+                </Motion.button>
+              </div>
+            </Motion.div>
+          )}
+        </AnimatePresence>
+      </Motion.nav>
+
+      {/* Space for Fixed Navbar */}
+      <div className="h-20"></div>
+    </>
   );
 };
 
