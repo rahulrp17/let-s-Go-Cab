@@ -13,11 +13,11 @@ const FloatingIcons = () => {
         initial={{ y: 0 }}
         animate={{ y: [0, -10, 0] }}
         transition={{ repeat: Infinity, duration: 1.5 }}
-<<<<<<< HEAD
+
         className="fixed bottom-4 left-10 z-50 bg-green-500 text-white p-3 rounded-full shadow-lg hover:scale-110 transition-transform"
-=======
+
         className="fixed bottom-4 left-10 z-50 bg-green-500 text-white p-3 overflow-hidden rounded-full shadow-lg hover:scale-110 transition-transform"
->>>>>>> 9894571c9b6576ed3d4dc88deed232b5e899552a
+ 
       >
         <FaWhatsapp size={22} />
       </Motion.a>
