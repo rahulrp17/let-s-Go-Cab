@@ -90,7 +90,7 @@ const Navbar = () => {
               onClick={() => navigate("/signup")}
               className="flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-violet-500 text-white px-6 py-3 rounded-full shadow-lg"
             >
-              Book Now
+              Sign Up
               <ArrowRight size={18} />
             </Motion.button>
 
