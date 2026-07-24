@@ -13,7 +13,7 @@ const FloatingIcons = () => {
         initial={{ y: 0 }}
         animate={{ y: [0, -10, 0] }}
         transition={{ repeat: Infinity, duration: 1.5 }}
-        className="fixed bottom-4 left-4 z-50 bg-green-500 text-white p-3 rounded-full shadow-lg hover:scale-110 transition-transform"
+        className="fixed bottom-4 left-10 z-50 bg-green-500 text-white p-3 rounded-full shadow-lg hover:scale-110 transition-transform"
       >
         <FaWhatsapp size={22} />
       </Motion.a>
@@ -24,7 +24,7 @@ const FloatingIcons = () => {
         initial={{ y: 0 }}
         animate={{ y: [0, -10, 0] }}
         transition={{ repeat: Infinity, duration: 1.5 }}
-        className="fixed bottom-4 right-4 z-50 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:scale-110 transition-transform"
+        className="fixed bottom-4 right-10 z-50 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:scale-110 transition-transform"
       >
         <FaPhoneAlt size={22} />
       </Motion.a>

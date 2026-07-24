@@ -1,14 +1,12 @@
 import React, { useState } from "react";
-import "./Navbar.css";
-import { logo5 } from "../../assets/images";
 import { NavLink, useNavigate } from "react-router-dom";
 import { motion as Motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { Menu, X, ArrowRight } from "lucide-react";
+import { logo5 } from "../../assets/images";
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isAccountCreated] = useState(false);
   const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(false);
 
   const menuItems = [
     { path: "/", label: "Home" },
@@ -19,106 +17,145 @@ const Navbar = () => {
   ];
 
   return (
-    <Motion.div
-      initial={{ y: -120, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 2, delay: 0.2, type: "spring", stiffness: 100 }}
-      className="navbar bg-white shadow-2xl w-full z-50 bottom-160"
+    <Motion.nav
+      initial={{ y: -80 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.7 }}
+      className="fixed top-0 left-0 w-full z-50  py-0"
     >
-      <div className="flex justify-between items-center px-4 py-2">
-        {/* Logo */}
-        <div className="logo flex items-center flex-col">
-          <img
-            src={logo5}
-            alt="Let's Go Cab logo"
-            className="w-28 h-18 rounded-full"
-          />
-        </div>
+      <div className="">
 
-        {/* Toggle button - visible on small screens */}
-        <button
-          className="md:hidden text-3xl text-gray-700 cursor-pointer pr-3"
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          {isOpen ? "✖" : "☰"}
-        </button>
+        <div className="bg-white backdrop-blur-xl pb-6 shadow-xl border overflow-hidden border-gray-200 px-6 py-3 flex justify-between items-center">
 
-        {/* Desktop Nav Links */}
-        <div className="hidden md:flex items-center text-lg font-bold">
-          {menuItems.map(({ path, label }) => (
-            <Motion.div
-              whileHover={{
-                scale: 1.1,
-                originX: 0.5,
-                transition: { duration: 0.3 },
-              }}
-              key={path}
-              className="mx-4"
-            >
+          {/* Logo */}
+          <div
+            onClick={() => navigate("/")}
+            className="flex items-center gap-3 cursor-pointer"
+          >
+            <img
+              src={logo5}
+              alt="logo"
+              className=" w-27 h-14 rounded-full "
+            />
+
+            {/* <div>
+              <h1 className="text-2xl font-extrabold bg-gradient-to-r from-indigo-600 to-violet-500 bg-clip-text text-transparent">
+                Let's Go Cab
+              </h1>
+
+              <p className="text-xs text-gray-500">
+                Premium Cab Service
+              </p>
+            </div> */}
+          </div>
+
+          {/* Desktop Menu */}
+
+          <div className="hidden lg:flex items-center gap-10 font-semibold">
+
+            {menuItems.map((item) => (
               <NavLink
-                to={path}
+                key={item.path}
+                to={item.path}
                 className={({ isActive }) =>
-                  isActive
-                    ? "text-blue-700"
-                    : "text-gray-600 hover:text-blue-800"
+                  `relative transition-all duration-300 ${
+                    isActive
+                      ? "text-indigo-600"
+                      : "text-gray-700 hover:text-indigo-600"
+                  }`
                 }
               >
-                {label}
+                {({ isActive }) => (
+                  <>
+                    {item.label}
+
+                    {isActive && (
+                      <Motion.div
+                        layoutId="activeNav"
+                        className="absolute -bottom-2 left-0 right-0 h-1 rounded-full bg-gradient-to-r from-indigo-600 to-violet-500"
+                      />
+                    )}
+                  </>
+                )}
               </NavLink>
-            </Motion.div>
-          ))}
+            ))}
 
-          {/* Login/Signup button */}
-          <div
-            className="bg-indigo-100 text-gray-700 border border-indigo-800 hover:bg-indigo-600 hover:text-white font-semibold py-2 px-4 rounded-full transition duration-300 cursor-pointer flex items-center gap-2"
-            onClick={() => navigate(isAccountCreated ? "/login" : "/signup")}
-          >
-            {isAccountCreated ? "Login" : "Sign Up"}
-            <ArrowRight className="w-5 h-5" />
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile Nav */}
-      {isOpen && (
-        <Motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            duration: 0.5,
-            type: "spring",
-            delay: 0.2,
-            stiffness: 100,
-          }}
-          exit={{ opacity: 0, y: -10 }}
-          className="md:hidden bg-blue-100 flex flex-col gap-3 mt-4 text-lg font-semibold items-center pb-4"
-        >
-          {menuItems.map(({ path, label }) => (
-            <NavLink
-              key={path}
-              to={path}
-              onClick={() => setIsOpen(false)}
-              className={({ isActive }) =>
-                isActive
-                  ? "text-blue-800 border-b-4 border-blue-800"
-                  : "text-gray-700 pl-2 hover:text-blue-800"
-              }
+            <Motion.button
+              whileHover={{
+                scale: 1.05,
+              }}
+              whileTap={{
+                scale: 0.9,
+              }}
+              onClick={() => navigate("/signup")}
+              className="flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-violet-500 text-white px-6 py-3 rounded-full shadow-lg"
             >
-              {label}
-            </NavLink>
-          ))}
+              Book Now
+              <ArrowRight size={18} />
+            </Motion.button>
 
-          {/* Login/Signup button for mobile */}
-          <div
-            className="bg-transparent text-gray-800 border border-gray-800 hover:bg-gray-800 hover:text-white font-semibold py-2 px-4 rounded-full transition duration-300 cursor-pointer flex items-center gap-2"
-            onClick={() => navigate(isAccountCreated ? "/login" : "/signUp")}
-          >
-            {isAccountCreated ? "Login" : "Sign Up"}
-            <ArrowRight className="w-5 h-5" />
           </div>
-        </Motion.div>
-      )}
-    </Motion.div>
+
+          {/* Mobile Button */}
+
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="lg:hidden"
+          >
+            {isOpen ? (
+              <X size={32} />
+            ) : (
+              <Menu size={32} />
+            )}
+          </button>
+        </div>
+
+        {/* Mobile Menu */}
+
+        {isOpen && (
+          <Motion.div
+            initial={{
+              opacity: 0,
+              y: -20,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+            }}
+            className="lg:hidden mt-3 bg-white rounded-3xl shadow-xl p-6"
+          >
+            <div className="flex flex-col gap-5">
+
+              {menuItems.map((item) => (
+                <NavLink
+                  key={item.path}
+                  to={item.path}
+                  onClick={() => setIsOpen(false)}
+                  className={({ isActive }) =>
+                    `text-lg ${
+                      isActive
+                        ? "text-indigo-600 font-bold"
+                        : "text-gray-700"
+                    }`
+                  }
+                >
+                  {item.label}
+                </NavLink>
+              ))}
+
+              <button
+                onClick={() => navigate("/signup")}
+                className="bg-gradient-to-r from-indigo-600 to-violet-500 text-white rounded-full py-3 mt-3"
+              >
+                Book Now
+              </button>
+
+            </div>
+          </Motion.div>
+        )}
+
+      </div>
+    </Motion.nav>
   );
 };
 
