@@ -14,7 +14,7 @@ import logo5 from "../../assets/images/logo5.png"; // update path as needed
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-800 text-white py-10 px-6 md:px-16">
+    <footer className="bg-gray-800 text-white py-10 px-6 md:px-16 overflow-hidden">
       <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-8">
 
         {/* Logo & Contact */}

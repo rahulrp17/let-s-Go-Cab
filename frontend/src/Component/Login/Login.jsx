@@ -76,7 +76,7 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-cover bg-center px-4  loginBg">
+    <div className="min-h-screen flex items-center justify-center bg-cover bg-center px-4 overflow-hidden loginBg">
       <Motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}

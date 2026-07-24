@@ -8,7 +8,7 @@ const FarePricing = () => {
   };
 
   return (
-    <div className="bg-gradient-to-br from-[#eef2f7] to-[#cfd8e7] py-20 px-4 flex flex-col items-center">
+    <div className="bg-gradient-to-br from-[#eef2f7] to-[#cfd8e7] py-20 px-4 flex flex-col items-center overflow-hidden">
       <Motion.div
         className="text-center mb-12"
         variants={fadeIn}

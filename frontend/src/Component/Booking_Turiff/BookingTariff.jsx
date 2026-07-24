@@ -43,7 +43,7 @@ const BookingTariff = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative z-10 w-full py-14 px-6 bg-gradient-to-br from-white to-slate-100"
+      className="relative z-10 w-full py-14 px-6 bg-gradient-to-br from-white to-slate-100 overflow-hidden"
     >
       <Motion.div
         initial={{ opacity: 0, y: 70 }}
